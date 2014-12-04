@@ -1,0 +1,38 @@
+<div class="popover" style="z-index: 10001; max-width: 450px">
+    <div class="arrow"></div>
+    <h3 ng-show="title" ng-bind-html="title" class="popover-title ng-binding"></h3>
+    <div class="popover-content" ng-init="blockContainer.start(' ');">
+        <style>
+            .success {
+                color: limegreen;
+            }
+            .error {
+                color: indianred;
+            }
+        </style>
+
+        <div ng-repeat="record in userTest.answers" style="border-bottom: 1px solid #999999">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Q.</label>
+                    <p>
+                        {{record.questionDescription}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>A.</label>
+                    <p ng-class="{success: record.answer.isRightAnswer, error: !record.answer.isRightAnswer}">
+                        {{record.answer.description}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions" style="margin-top: 10px">
+            <button ng-click="blockContainer.stop();$hide()" class="btn btn-default btn-sm" type="button">Close</button>
+        </div>
+    </div>
+</div>

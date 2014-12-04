@@ -1,0 +1,50 @@
+<style>
+    .modal-dialog {
+        width: 600px;
+        min-height: 450px;
+    }
+</style>
+<div class="modal-header">
+    <div class="row">
+        <div class="col-md-7"><h3 class="modal-title">{{test.title}}</h3></div>
+
+        <div class="col-md-3 text-right" style="float: right">
+            <h4 class="modal-title"> {{(questionIdx + 1) + ' / ' + test.questions.length}}</h4>
+        </div>
+    </div>
+</div>
+<div class="modal-body" ng-form="questionForm">
+    <div class="container-fluid" ng-hide="testFinished">
+        <div class="row">
+            <div class="col-md-12">
+                <strong>{{question.description}}</strong>
+            </div>
+        </div>
+
+        <div class="row" ng-repeat="answer in question.answers" style="margin-top: 10px">
+            <div class="col-md-12">
+            <span>
+                <input type="radio" name="answer" value="{{answer.id}}" ng-model="$parent.question.userAnswer">
+            </span>
+            <span>
+                {{answer.description}}
+            </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" ng-show="testFinished && score">
+        <div class="row">
+            <div class="col-md-12 text-success text-center" style="min-height: 100px">
+                <h3>{{score + ' Right Answer' + ((score > 1) ? 's': '')}}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary btn-sm" ng-click="previous()" ng-if="hasPrevious() && !testFinished">Previous</button>
+    <button class="btn btn-primary btn-sm" ng-click="next()" ng-if="!testFinished" data-ng-disabled="!question.userAnswer">{{isLast() ? 'Finish' : 'Next'}}</button>
+    <button class="btn btn-default btn-sm" ng-click="cancel()" ng-if="!testFinished">Cancel</button>
+    <button class="btn btn-default btn-sm" ng-click="close()" ng-if="testFinished">Close</button>
+</div>
