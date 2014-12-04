@@ -132,11 +132,63 @@
             <version>2.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.googlecode.flyway</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>1.5</version>
+        </dependency>
+
 	</dependencies>
 
     <build>
 
 		<plugins>
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <user>root</user>
+                    <password>root</password>
+                    <!--<schemas>-->
+                        <!--<schema>testing</schema>-->
+                    <!--</schemas>-->
+                    <!--<table>schema_versions</table>-->
+                    <!--<sqlMigrationPrefix>Migration-</sqlMigrationPrefix>-->
+                    <!--<sqlMigrationSeparator>__</sqlMigrationSeparator>-->
+                    <!--<sqlMigrationSuffix>-OK.sql</sqlMigrationSuffix>-->
+                    <encoding>ISO-8859-1</encoding>
+                    <!--<placeholders>
+                        <aplaceholder>value</aplaceholder>
+                        <otherplaceholder>value123</otherplaceholder>
+                    </placeholders>-->
+                    <!--<placeholderPrefix>#[</placeholderPrefix>-->
+                    <!--<placeholderSuffix>]</placeholderSuffix>-->
+                    <!--<target>1.1</target>-->
+                    <!--<outOfOrder>false</outOfOrder>-->
+                    <!--<validateOnMigrate>true</validateOnMigrate>-->
+                    <!--<cleanOnValidationError>false</cleanOnValidationError>-->
+                    <!--<baselineOnMigrate>false</baselineOnMigrate>-->
+                    <!--<baselineVersion>5</baselineVersion>-->
+                    <baselineDescription>Let's go!</baselineDescription>
+                    <skip>false</skip>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://127.0.0.1:3306/testing?useUnicode=true&amp;characterEncoding=utf8</url>
+                    <baseDir>db/migration</baseDir>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>1.4.177</version>
+                    </dependency>
+
+
+                </dependencies>
+            </plugin>
+
 			<!-- Compiler plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
